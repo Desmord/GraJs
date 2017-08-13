@@ -53,7 +53,7 @@ gulp.task('updateScss', () => {
 
     console.log('Uaktualnianie plików Scss.')
 
-    return gulp.src('dev/sass/mainScss.scss')
+    return gulp.src('dev/sass/mainCss.scss')
         .pipe(plumber())
         .pipe(sass.sync())
         .pipe(gulpAutoprefixer({
@@ -77,7 +77,7 @@ gulp.task('watchScss', () => {
 //--------------------------------------------------------
 
 gulp.task('cleanHTML', () => {
-    return del('build/*');
+    return del('build/index.html');
 });
 
 

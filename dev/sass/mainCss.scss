@@ -1,0 +1,105 @@
+$fs: 20px;
+@mixin Czcionki() {
+    font-size: $fs*2.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    letter-spacing: 2px;
+}
+
+html {
+    font-size: $fs;
+    font-family: 'Arimo', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #363131;
+}
+
+#copyR {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
+}
+
+#mainBoard {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    background-color: #d17d7d;
+}
+
+#pause {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    background-color: #641a1a;
+    display: none;
+}
+
+#score {
+    background-color: #56ad8f;
+    grid-column: 2;
+    grid-row: 4;
+    @include Czcionki();
+}
+
+#startStopButton {
+    background-color: #64a9ce;
+    grid-column: 3;
+    grid-row: 4;
+    @include Czcionki();
+}
+
+#startStopButton:hover {
+    cursor: pointer;
+    background-color: #518fb1;
+}
+
+@media all and (max-width: 480px) {
+    #container {
+        grid-template-columns: 5px 1fr 5px;
+        grid-template-rows: 10px auto 30px 30px 50px;
+    }
+    #mainBoard {
+        grid-column: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        background-color: #d17d7d;
+    }
+    #pause {
+        grid-column: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        background-color: #4db559;
+    }
+    #score {
+        background-color: #56ad8f;
+        grid-column: 2;
+        grid-row: 3;
+        font-size: $fs*0.7;
+    }
+    #startStopButton {
+        background-color: #64a9ce;
+        grid-column: 2;
+        grid-row: 4;
+    }
+    #copyR {
+        font-size: $fs*0.7;
+    }
+}
