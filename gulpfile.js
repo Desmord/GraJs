@@ -22,7 +22,7 @@ gulp.task('updateJs', () => {
 
     console.log('Uaktualnianie plików Js.');
 
-    return gulp.src(['dev/js/mainJs.js', 'dev/js/minrorJs.js'])
+    return gulp.src(['dev/js/drawing.js','dev/js/buttonEvent.js','dev/js/mainJs.js'])
         .pipe(plumber())
         .pipe(babel({
             presets: ['es2015'],

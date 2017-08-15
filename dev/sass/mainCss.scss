@@ -37,6 +37,7 @@ body {
     grid-template-columns: 1fr 2fr 2fr 1fr;
     grid-template-rows: 1fr 2fr 2fr 1fr 1fr;
 }
+
 #mainBoard {
     -ms-grid-column: 2;
     -ms-grid-column-span: 4 - 2;
@@ -46,13 +47,15 @@ body {
     grid-row: 2/4;
     background-color: #0b0b0b;
 }
+
 #pause {
     -ms-grid-column: 2;
     -ms-grid-column-span: 4 - 2;
     -ms-grid-row: 2;
     -ms-grid-row-span: 4 - 2;
     grid-column: 2/4;
-    grid-row: 2/4;;
+    grid-row: 2/4;
+    ;
     background-color: #641a1a;
     display: none;
 }
@@ -66,6 +69,7 @@ body {
     grid-row: 4;
     @include Czcionki();
 }
+
 #startStopButton {
     background-color: #246d95;
     -ms-grid-column: 3;
@@ -80,6 +84,17 @@ body {
 #startStopButton:hover {
     cursor: pointer;
     background-color: darken(#246d95, 4%);
+}
+
+@keyframes flash {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.flash {
+    animation-name: flash;
+    animation-duration: 0.5s;
 }
 
 @media all and (max-width: 480px) {
@@ -104,7 +119,6 @@ body {
         grid-row: 3;
         font-size: $fs*0.7;
     }
-
     #startStopButton {
         background-color: #64a9ce;
         grid-column: 2;
