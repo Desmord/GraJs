@@ -1,0 +1,1 @@
+"use strict";var canvasWidth=document.querySelector("#mainBoard").offsetWidth,canvasHeight=document.querySelector("#mainBoard").offsetHeight,canvas=document.querySelector("canvas"),ctx=canvas.getContext("2d");canvas.height=canvasHeight,canvas.width=canvasWidth;
