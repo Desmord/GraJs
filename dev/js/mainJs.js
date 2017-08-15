@@ -5,6 +5,9 @@
     
     buttonEvent();
     
+    draw();
+    mouseMoveEvent();
+    
 })()
 
 
