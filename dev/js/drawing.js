@@ -5,29 +5,23 @@ const topCanvas = canvas.offsetTop;
 const leftCanvas = canvas.offsetLeft;
 const ctx = canvas.getContext('2d');
 
+let pngs = document.querySelectorAll('img');
+let exsplosionsArray = [];
 
-let enemyImage = new Image();
-enemyImage.src = "../png/ships/s2.png";
+for (let i = 1; i < pngs.length; i++) {
+    exsplosionsArray.push(pngs[i]);
+}
 
-let speed = 10;
-let enemyArray = [
-    {
-        id: 1,
-        x: 200,
-        y: 300,
-        xDirection: '-',
-        yDirection: '+',
-        angle: 0
-    },
-    {
-        id: 2,
-        x: 800,
-        y: 400,
-        xDirection: '-',
-        yDirection: '+',
-        angle: 90
+let speed = 0;
+let enemyArray = [];
+
+let enemyImage = document.querySelector('#ship');
+
+let drawEnemies = () => {
+    for (let i = 0; i < enemyArray.length; i++) {
+        ctx.drawImage(enemyImage, enemyArray[i].x, enemyArray[i].y, canvasWidth / 35, canvasWidth / 40);
     }
-];
+};
 
 let pointerX = canvasWidth / 2;
 let pointerY = canvasHeight / 2;
@@ -59,49 +53,57 @@ const drawPointer = () => {
 
 };
 
-const changeEnemyPosition = () => {
-    for (let i = 0; i < enemyArray.length; i++) {
-        if (enemyArray[i].xDirection == '+') {
-            enemyArray[i].x = (enemyArray[i].x + 1);
-        } else {
-            enemyArray[i].x = (enemyArray[i].x - 1);
-        }
-        if (enemyArray[i].yDirection == '+') {
-            enemyArray[i].y = (enemyArray[i].y + 1);
-        } else {
-            enemyArray[i].y = (enemyArray[i].y - 1);
-        }
-    }
-    setTimeout(changeEnemyPosition, speed);
-};
-
-const changeEnemyDirection = () => {
-
-    let time = (Math.floor(Math.random() * 5) + 1) * 1000;
+const ifCanvasEnd = () => {
 
     for (let i = 0; i < enemyArray.length; i++) {
-        if (Math.floor(Math.random() * 2) + 1 == 1) {
+        if (enemyArray[i].x < 0) {
             enemyArray[i].xDirection = '+';
-        } else {
-            enemyArray[i].xDirection = '-';
-        }
-
-        if (Math.floor(Math.random() * 2) + 1 == 1) {
+        } else if (enemyArray[i].y < 0) {
             enemyArray[i].yDirection = '+';
-        } else {
+        } else if (enemyArray[i].x + canvasWidth / 35 > canvasWidth) {
+            enemyArray[i].xDirection = '-';
+        } else if (enemyArray[i].y + canvasWidth / 40 > canvasHeight) {
             enemyArray[i].yDirection = '-';
         }
     }
 
-    setTimeout(changeEnemyDirection, time);
-
 };
 
-const drawEnemies = () => {
-
+const changeEnemyPosition = () => {
     for (let i = 0; i < enemyArray.length; i++) {
-        ctx.drawImage(enemyImage, enemyArray[i].x, enemyArray[i].y, canvasWidth / 35, canvasHeight / 25);
+        if (enemyArray[i].xDirection == '+') {
+            enemyArray[i].x = (enemyArray[i].x + speed);
+        } else {
+            enemyArray[i].x = (enemyArray[i].x - speed);
+        }
+        if (enemyArray[i].yDirection == '+') {
+            enemyArray[i].y = (enemyArray[i].y + speed);
+        } else {
+            enemyArray[i].y = (enemyArray[i].y - speed);
+        }
     }
+    ifCanvasEnd();
+    setTimeout(changeEnemyPosition, 10);
+};
+
+const changeEnemyDirection = (id) => {
+
+    let time = (Math.floor(Math.random() * 5) + 1) * 1000;
+
+    if (Math.floor(Math.random() * 2) + 1 == 1) {
+        enemyArray[id].xDirection = '+';
+    } else {
+        enemyArray[id].xDirection = '-';
+    }
+
+    if (Math.floor(Math.random() * 2) + 1 == 1) {
+        enemyArray[id].yDirection = '+';
+    } else {
+        enemyArray[id].yDirection = '-';
+    }
+    enemyArray[id].changeD = setTimeout(() => {
+        changeEnemyDirection(id);
+    }, time);
 
 };
 
@@ -133,9 +135,42 @@ let mouseMoveEvent = () => {
 };
 
 let mainLoop = () => {
-    setTimeout(changeEnemyDirection, 1000);
-    setTimeout(changeEnemyPosition, speed);
+
+    setTimeout(changeEnemyPosition, 10);
     setInterval(draw, 5);
+
 };
 
-//drawEnemies , clickEvent,
+//---------------------------------
+
+let expolosionVar = exsplosionsArray[0];
+
+const expolosion = (e) => {
+    ctx.drawImage(expolosionVar, e.clientX - leftCanvas - canvasWidth / 35, e.clientY - topCanvas - canvasWidth / 40, canvasWidth / 15, canvasWidth / 20);
+};
+
+const setCurrentExplosion = () => {
+
+    if (expolosionVar == exsplosionsArray[8]) {
+        expolosionVar = exsplosionsArray[0];
+    } else {
+        let index = exsplosionsArray.indexOf(expolosionVar) + 1;
+        expolosionVar = exsplosionsArray[index];
+        setTimeout(setCurrentExplosion, 30);
+    }
+
+};
+
+const drawExplosion = (e) => {
+
+    setCurrentExplosion();
+
+    let inter = setInterval(() => {
+        expolosion(e);
+    }, 10);
+
+    setTimeout(() => {
+        clearInterval(inter);
+    }, 240);
+
+};
