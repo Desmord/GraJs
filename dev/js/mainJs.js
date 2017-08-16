@@ -5,7 +5,7 @@
     
     buttonEvent();
     
-    draw();
+    mainLoop();
     mouseMoveEvent();
     
 })()
