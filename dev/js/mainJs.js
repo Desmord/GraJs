@@ -20,9 +20,6 @@ const createEnemy = () => {
 
 };
 
-const deleteEnemy = () => {
-
-};
 
 (() => {
 
@@ -31,17 +28,14 @@ const deleteEnemy = () => {
 
     buttonEvent();
 
+    shipsButtonsEvent();
+    speedButtonsEvents();
+    
     mainLoop();
     mouseMoveEvent();
     
-    createEnemy(); 
-    
-  //  setTimeout(()=>{
-   //     clearTimeout(enemyArray[0].changeD);
-  //  },10000);
-  //  for(let i =0;i<8;i++){
-   //     createEnemy(); 
-   // }
-  //  speed = 4;
-    
+    createEnemy();
+  //  createEnemy();
+//    createEnemy();
+
 })()
