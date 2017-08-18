@@ -5,15 +5,19 @@ const topCanvas = canvas.offsetTop;
 const leftCanvas = canvas.offsetLeft;
 const ctx = canvas.getContext('2d');
 
+let pointerX = canvasWidth / 2;
+let pointerY = canvasHeight / 2;
+
+let speed = 0;
+let currentspeed = 0;
+let enemyArray = [];
+
 let pngs = document.querySelectorAll('img');
 let exsplosionsArray = [];
 
 for (let i = 1; i < pngs.length; i++) {
     exsplosionsArray.push(pngs[i]);
 }
-
-let speed = 0;
-let enemyArray = [];
 
 let enemyImage = document.querySelector('#ship');
 
@@ -22,9 +26,6 @@ let drawEnemies = () => {
         ctx.drawImage(enemyImage, enemyArray[i].x, enemyArray[i].y, canvasWidth / 35, canvasWidth / 40);
     }
 };
-
-let pointerX = canvasWidth / 2;
-let pointerY = canvasHeight / 2;
 
 const drawBackground = () => {
 

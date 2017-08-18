@@ -96,7 +96,6 @@ canvas:hover {
 }
 
 #startStopButton {
-    background-color: #246d95;
     -ms-grid-column: 3;
     -ms-grid-column-span: 3 - 3;
     -ms-grid-row: 4;
@@ -106,7 +105,27 @@ canvas:hover {
     @include Czcionki();
 }
 
-#startStopButton:hover {
+#start {
+    height: 100%;
+    width: 45%;
+    background-color: #246d95;
+    @include flex();
+}
+
+#start:hover {
+    cursor: pointer;
+    background-color: darken(#246d95, 4%);
+}
+
+#restart {
+    height: 100%;
+    width: 45%;
+    background-color: #246d95;
+    @include flex();
+    margin-left: 10%;
+}
+
+#restart:hover {
     cursor: pointer;
     background-color: darken(#246d95, 4%);
 }
@@ -128,7 +147,6 @@ canvas:hover {
     animation-duration: 0.5s;
 }
 
-
 #iloscContent {
     -ms-grid-column: 2;
     -ms-grid-column-span: 2 - 2;
@@ -148,7 +166,6 @@ canvas:hover {
     grid-row: 5;
     @include Czcionki();
 }
-
 
 .left {
     height: 96%;
@@ -182,17 +199,17 @@ canvas:hover {
     cursor: pointer;
 }
 
-#ilosc{
+#ilosc {
     height: 100%;
     width: 40%;
     @include flex();
     font-size: $fs*1.2;
 }
 
-#predkosc{
-   height: 100%;
+#predkosc {
+    height: 100%;
     width: 40%;
-    @include flex(); 
+    @include flex();
     font-size: $fs*1.2;
 }
 
@@ -240,10 +257,10 @@ canvas:hover {
         grid-row: 6;
         font-size: $fs*0.7;
     }
-    #ilosc{
+    #ilosc {
         font-size: $fs*0.7;
     }
-    #predkosc{
+    #predkosc {
         font-size: $fs*0.7;
     }
 }

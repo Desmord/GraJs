@@ -62,9 +62,13 @@ let removeClickEvent = () => {
 
 
 let startEvent = (button) => {
-
-    speed = 1;
-    document.querySelector('#predkosc span').innerHTML = 1;
+    if(currentspeed == 0 && speed == 0){
+        speed =1;
+        currentspeed = 1;
+    }else{
+        speed = currentspeed;
+    }
+    document.querySelector('#predkosc span').innerHTML = currentspeed;
     
     mouseMoveEvent();
     mouseClickEvent();
@@ -82,6 +86,7 @@ let startEvent = (button) => {
 
 let stopEvent = (button) => {
 
+    currentspeed = speed;
     speed = 0;
     document.querySelector('#predkosc span').innerHTML = 0;
     removeClickEvent();
@@ -97,10 +102,18 @@ let stopEvent = (button) => {
 
 };
 
+const restartEvent = ()=>{
+    enemyArray = [];
+    speed = 1;
+    document.querySelector('#predkosc span').innerHTML = 1;
+    document.querySelector('#ilosc span').innerHTML = 1;
+    document.querySelector('#scoreBoard span').innerHTML = 0;
+    createEnemy();
+};
 
 let buttonEvent = () => {
 
-    let button = document.querySelector('#startStopButton');
+    let button = document.querySelector('#start');
 
     button.addEventListener('click', () => {
 
@@ -112,6 +125,11 @@ let buttonEvent = () => {
 
     });
 
+   let rbutton = document.querySelector('#restart');
+    
+    rbutton.addEventListener('click',()=>{
+       restartEvent();
+    });
 };
 
 //-----------------------------------------------------------------------
@@ -190,6 +208,7 @@ const speedButtonsEvents = () => {
     let removeSpeed = document.querySelector('#predkoscContent .left');
     removeSpeed.addEventListener('click', () => {
         if(parseInt(document.querySelector('#predkosc span').innerHTML) == 0){
+            speed = 0;
         }else{
             refreshSpeedHTMLDown(); 
             downSpeed();
