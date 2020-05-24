@@ -1,4 +1,0 @@
-1.npm install 
-
-
-2. By uruchomić: gulp build
